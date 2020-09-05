@@ -28,7 +28,6 @@ public class CheckBoxesTests {
 
         checkbox.click();
 
-
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

@@ -75,7 +75,7 @@ public class RedmineTest extends BaseTest {
 
         redmineLoginPage.login(user,password);
 
-        Assert.assertEquals(userExpected, );
+        //Assert.assertEquals(userExpected, );
 
     }
 }

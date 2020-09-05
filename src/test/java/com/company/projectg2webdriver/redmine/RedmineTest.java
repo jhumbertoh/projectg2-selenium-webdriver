@@ -19,7 +19,7 @@ public class RedmineTest {
 
         driver.get("http://localhost:8081/");
 
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
 
         //driver.manage().window().fullscreen();
 
@@ -44,7 +44,7 @@ public class RedmineTest {
         WebElement txtPassword = driver.findElement(By.name("password"));
         txtPassword.sendKeys("bitnami1");
 
-        WebElement btnLogin = driver.findElement(By.xpath("//[@id='login-submit']"));
+        WebElement btnLogin = driver.findElement(By.xpath("//*[@id='login-submit']"));
         btnLogin.click();
 
         WebElement lblLogin = driver.findElement(By.xpath("//*[@id='loggedas']"));

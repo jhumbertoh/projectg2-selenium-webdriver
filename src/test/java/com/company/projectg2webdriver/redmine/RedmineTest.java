@@ -1,8 +1,10 @@
 package com.company.projectg2webdriver.redmine;
 
 import com.company.projectg2webdriver.base.BaseTest;
+import com.company.projectg2webdriver.pages.RedmineHomePage;
 import com.company.projectg2webdriver.pages.RedmineLoginPage;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -11,6 +13,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class RedmineTest extends BaseTest {
+
+
+    @BeforeClass
+    public static void launchApp(){
+
+        driver.get("http://localhost:8081/login");
+    }
 
     @Test
     public void login(){
@@ -72,10 +81,11 @@ public class RedmineTest extends BaseTest {
         String userExpected = "Logged in as user";
 
         RedmineLoginPage redmineLoginPage = new RedmineLoginPage(driver);
+        RedmineHomePage redmineHomePage = redmineLoginPage.login(user,password);
 
-        redmineLoginPage.login(user,password);
+        String userActual = redmineHomePage.getUserLogged();
 
-        //Assert.assertEquals(userExpected, );
+        Assert.assertEquals(userExpected, userActual);
 
     }
 }

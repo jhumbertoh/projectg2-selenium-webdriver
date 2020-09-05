@@ -15,11 +15,13 @@ public class RedmineLoginPage {
         this.driver = driver;
     }
 
-    public void login(String username, String password){
+    public RedmineHomePage login(String username, String password){
 
         driver.findElement(txtUserName).sendKeys(username);
         driver.findElement(txtPassword).sendKeys(password);
         driver.findElement(btnLogin).click();
+
+        return new RedmineHomePage(driver);
 
     }
 }

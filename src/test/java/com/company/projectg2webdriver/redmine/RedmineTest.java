@@ -1,5 +1,7 @@
 package com.company.projectg2webdriver.redmine;
 
+import com.company.projectg2webdriver.base.BaseTest;
+import com.company.projectg2webdriver.pages.RedmineLoginPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -8,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class RedmineTest {
+public class RedmineTest extends BaseTest {
 
     @Test
     public void login(){
@@ -60,6 +62,20 @@ public class RedmineTest {
         }
 
         driver.quit();
+
+    }
+
+    @Test
+    public void loginRedmine(){
+
+        String user = "user", password = "bitnami1";
+        String userExpected = "Logged in as user";
+
+        RedmineLoginPage redmineLoginPage = new RedmineLoginPage(driver);
+
+        redmineLoginPage.login(user,password);
+
+        Assert.assertEquals(userExpected, );
 
     }
 }

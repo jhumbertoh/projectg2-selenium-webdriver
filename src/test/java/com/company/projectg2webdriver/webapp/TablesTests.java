@@ -26,6 +26,8 @@ public class TablesTests {
 
         System.out.println(fila.getText());
 
+        //Jose
+
         Assert.assertEquals("Table 2 Row 2", fila.getText());
 
         driver.quit();

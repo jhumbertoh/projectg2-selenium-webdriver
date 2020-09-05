@@ -19,6 +19,7 @@ public class RadioButtonTests {
 
         driver.get("file:///Users/jhumbertoh/webinar/projectg2-selenium-webdriver/webapp/radiobuttonstest.html");
 
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

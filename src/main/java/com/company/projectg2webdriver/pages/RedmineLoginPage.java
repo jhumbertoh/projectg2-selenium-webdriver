@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class RedmineLoginPage {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
     private By txtUserName = By.id("username");
     private By txtPassword = By.id("password");

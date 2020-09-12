@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest {
 
     protected static WebDriver driver;
@@ -31,7 +33,9 @@ public class BaseTest {
                 setChromeDriverProperty();
         }
 
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
+        //Implicit Wait
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(Urls.REDMINE_LOGIN);
         redmineLoginPage = new RedmineLoginPage(driver);
     }

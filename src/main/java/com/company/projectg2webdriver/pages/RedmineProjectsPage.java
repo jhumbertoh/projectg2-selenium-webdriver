@@ -4,10 +4,11 @@ import com.company.projectg2webdriver.models.RedmineProject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RedmineProjectsPage {
+public class RedmineProjectsPage extends RedmineLoginPage{
 
-    private WebDriver driver;
 
     private By btnNewProject = By.xpath("//a[text()='New project']");
 
@@ -21,7 +22,7 @@ public class RedmineProjectsPage {
 
 
     public RedmineProjectsPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
     public void createProject(RedmineProject redmineProject){
@@ -51,6 +52,9 @@ public class RedmineProjectsPage {
     }
 
     public String getUIMessage(){
+        //Explicit Wait
+        WebDriverWait wait = new WebDriverWait(driver,5);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(lblMessage)));
         return driver.findElement(lblMessage).getText();
     }
 }

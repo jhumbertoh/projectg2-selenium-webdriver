@@ -37,4 +37,8 @@ public class BaseTest {
         driver.quit();
     }
 
+    public static WebDriver getDriver(){
+        return driver;
+    }
+
 }

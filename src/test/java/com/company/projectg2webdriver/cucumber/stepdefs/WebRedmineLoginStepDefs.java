@@ -25,6 +25,12 @@ public class WebRedmineLoginStepDefs {
     @When("I login with my credentials user {string} and {string}")
     public void iLoginWithMyCredentialsUserAnd(String user, String password) {
 
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         redmineHomePage = baseStepDefs.currentPage.login(user, password);
 
     }

@@ -6,6 +6,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class BaseTest {
 
@@ -15,12 +17,23 @@ public class BaseTest {
     @BeforeClass
     public static void setUp(){
 
-        setChromeDriverProperty();
+        String browserName = System.getenv("browserName");
+        browserName = (browserName != null)? browserName.toLowerCase() : "";
 
-        driver = new ChromeDriver();
+        switch (browserName){
+            case "firefox":
+                setFirefoxDriverProperty();
+                break;
+            case "safari":
+                setSafariDriverProperty();
+                break;
+            default:
+                setChromeDriverProperty();
+        }
+
+        driver.manage().window().maximize();
         driver.get(Urls.REDMINE_LOGIN);
         redmineLoginPage = new RedmineLoginPage(driver);
-
     }
 
     private static void setChromeDriverProperty(){
@@ -30,6 +43,21 @@ public class BaseTest {
         else{
             System.setProperty("webdriver.chrome.driver", "resources/drivers/chromedriver");
         }
+        driver = new ChromeDriver();
+    }
+
+    private static void setFirefoxDriverProperty(){
+        if(System.getProperty("os.name").toLowerCase().contains("windows")){
+            System.setProperty("webdriver.gecko.driver", "resources/drivers/geckodriver.exe");
+        }
+        else{
+            System.setProperty("webdriver.gecko.driver", "resources/drivers/geckodriver");
+        }
+        driver = new FirefoxDriver();
+    }
+
+    private static void setSafariDriverProperty(){
+         driver = new SafariDriver();
     }
 
     @AfterClass

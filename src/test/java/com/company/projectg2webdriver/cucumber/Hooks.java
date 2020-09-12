@@ -8,6 +8,7 @@ public class Hooks {
 
     @Before("@e2e")
     public static void setUp(){
+        System.out.println("Running e2e test..");
         BaseTest.setUp();
     }
 

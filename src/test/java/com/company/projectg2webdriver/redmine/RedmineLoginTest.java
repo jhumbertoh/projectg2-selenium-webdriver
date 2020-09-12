@@ -14,6 +14,7 @@ public class RedmineLoginTest extends BaseTest {
         String user = "user", password = "bitnami1";
         String userExpected = "Logged in as user";
 
+
         RedmineHomePage redmineHomePage = redmineLoginPage.login(user,password);
 
         String userActual = redmineHomePage.getUserLogged();

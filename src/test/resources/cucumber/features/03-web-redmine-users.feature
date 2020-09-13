@@ -2,7 +2,7 @@ Feature: Desktop Web UI - Redmine - Users
   As a user ...
   I want to ...
 
-
+  @e2e
   Scenario: Create a User
     Given I go to the Redmine login page on URL
     And I login with my credentials user "user" and "bitnami1"

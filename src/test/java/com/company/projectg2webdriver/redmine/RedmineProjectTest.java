@@ -14,7 +14,7 @@ public class RedmineProjectTest extends BaseTest {
 
         RedmineHomePage redmineHomePage = redmineLoginPage.login("user", "bitnami1");
 
-        RedmineProjectsPage redmineProjectsPage = redmineHomePage.clickOnLink("projects");
+        RedmineProjectsPage redmineProjectsPage = (RedmineProjectsPage) redmineHomePage.clickOnLink("projects");
 
         redmineProjectsPage.clickNewProject();
 

@@ -24,7 +24,7 @@ public class WebRedmineProjectStepDefs {
     public void iCreateAProject(Map<String, String> projectData) {
 
         RedmineHomePage redmineHomePage = (RedmineHomePage) baseStepDefs.currentPage;
-        redmineProjectsPage = redmineHomePage.clickOnLink("Projects");
+        redmineProjectsPage = (RedmineProjectsPage) redmineHomePage.clickOnLink("Projects");
 
         String number = Util.generateRandomNumber();
 

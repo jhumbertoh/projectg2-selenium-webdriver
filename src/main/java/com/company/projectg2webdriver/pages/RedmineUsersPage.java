@@ -28,6 +28,8 @@ public class RedmineUsersPage extends RedmineLoginPage {
 
     private By listUsers = By.tagName("table");
 
+    private By linkDelete = By.linkText("Delete");
+
     public RedmineUsersPage(WebDriver driver) {
         super(driver);
     }
@@ -75,6 +77,26 @@ public class RedmineUsersPage extends RedmineLoginPage {
 
     public void clickOnLinkNewUsers() {
         driver.findElement(linkNewUsers).click();
+    }
+
+    public void removeUser(){
+        driver.switchTo().alert().accept();
+
+    }
+
+    public void clickLinkDeleteUser(String userName){
+
+        List<WebElement> userList = driver.findElement(By.tagName("table"))
+                .findElement(By.tagName("tbody"))
+                .findElements(By.tagName("tr"));
+
+        for (WebElement user : userList) {
+            if (userName.equals(user.findElements(By.tagName("td")).get(0).getText())){
+                user.findElements(By.tagName("td")).get(7).findElement(linkDelete).click();
+                break;
+            }
+
+        }
     }
 
 }

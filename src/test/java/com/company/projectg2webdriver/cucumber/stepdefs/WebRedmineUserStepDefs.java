@@ -57,4 +57,30 @@ public class WebRedmineUserStepDefs {
         redmineUsersPage.clickOnLinkUsers();
         Assert.assertTrue(redmineUsersPage.userIsOnTheList(redmineUser.getUserName()));
     }
+
+    @And("I go to the list of users")
+    public void iGoToTheListOfUsers() {
+
+        RedmineHomePage redmineHomePage = (RedmineHomePage) baseStepDefs.currentPage;
+        redmineUsersPage = (RedmineUsersPage) redmineHomePage.clickOnLink("Administration");
+        redmineUsersPage.clickOnLinkUsers();
+    }
+
+    @When("I remove the user {string} from the user list")
+    public void iRemoveTheUserFromTheUserList(String userName) {
+
+        redmineUser = new RedmineUser();
+        redmineUser.setUserName(userName);
+
+        redmineUsersPage.clickLinkDeleteUser(userName);
+        redmineUsersPage.removeUser();
+    }
+
+
+    @Then("The user should not be displayed in the user list")
+    public void theUserShouldNotBeDisplayedInTheUserList() {
+
+        Assert.assertFalse(redmineUsersPage.userIsOnTheList(redmineUser.getUserName()));
+
+    }
 }

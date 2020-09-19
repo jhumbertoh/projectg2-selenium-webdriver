@@ -84,3 +84,8 @@ nb-configuration.xml
 
 ### VS Code ###
 .vscode/
+
+##########################
+## Allure Report
+##########################
+.allure

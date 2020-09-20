@@ -7,8 +7,12 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -22,15 +26,24 @@ public class BaseTest {
         String browserName = System.getenv("browserName");
         browserName = (browserName != null)? browserName.toLowerCase() : "";
 
+        //String webDriverRemote = System.getenv("webDriverRemote");
+        //Boolean isWebDriverRemote = (webDriverRemote != null)? Boolean.parseBoolean(webDriverRemote.toLowerCase()) : Boolean.parseBoolean("false");
+
+
         switch (browserName){
             case "firefox":
-                setFirefoxDriverProperty();
+                /*if(isWebDriverRemote)
+                    setChromeDriverPropertyLocal();
+                else
+                   setFirefoxDriverPropertyRemote(browserName);
+                 */
+                setFirefoxDriverProperty(browserName);
                 break;
             case "safari":
-                setSafariDriverProperty();
+                setSafariDriverProperty(browserName);
                 break;
             default:
-                setChromeDriverProperty();
+                setChromeDriverProperty("chrome");
         }
 
         //driver.manage().window().maximize();
@@ -40,28 +53,46 @@ public class BaseTest {
         redmineLoginPage = new RedmineLoginPage(driver);
     }
 
-    private static void setChromeDriverProperty(){
-        if(System.getProperty("os.name").toLowerCase().contains("windows")){
-            System.setProperty("webdriver.chrome.driver", "resources/drivers/chromedriver.exe");
+    private static void setChromeDriverProperty(String browserName){
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setBrowserName(browserName);
+
+        try {
+            URL hubUrl = new URL(Urls.SELENIUM_GRID);
+            driver = new RemoteWebDriver(hubUrl,capabilities);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
-        else{
-            System.setProperty("webdriver.chrome.driver", "resources/drivers/chromedriver");
-        }
-        driver = new ChromeDriver();
+
     }
 
-    private static void setFirefoxDriverProperty(){
-        if(System.getProperty("os.name").toLowerCase().contains("windows")){
-            System.setProperty("webdriver.gecko.driver", "resources/drivers/geckodriver.exe");
+    private static void setFirefoxDriverProperty(String browserName){
+
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setBrowserName(browserName);
+
+        try {
+            URL hubUrl = new URL(Urls.SELENIUM_GRID);
+            driver = new RemoteWebDriver(hubUrl,capabilities);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
-        else{
-            System.setProperty("webdriver.gecko.driver", "resources/drivers/geckodriver");
-        }
-        driver = new FirefoxDriver();
     }
 
-    private static void setSafariDriverProperty(){
-         driver = new SafariDriver();
+    private static void setSafariDriverProperty(String browserName){
+
+        DesiredCapabilities capabilities = DesiredCapabilities.safari();
+        capabilities.setBrowserName(browserName);
+
+        try {
+            URL hubUrl = new URL(Urls.SELENIUM_GRID);
+            driver = new RemoteWebDriver(hubUrl,capabilities);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterClass
